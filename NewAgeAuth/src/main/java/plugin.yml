@@ -1,0 +1,4 @@
+name: NewAgeAuth
+main: org.hivebuild.newageauth.NewAgeAuth
+version: 1.0
+author: e-freak

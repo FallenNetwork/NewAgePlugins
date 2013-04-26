@@ -1,0 +1,13 @@
+# Eclipse stuff
+.classpath
+.project
+.settings
+.metadata
+
+/.git
+
+# Build stuff
+bin
+
+#Libraries
+lib
