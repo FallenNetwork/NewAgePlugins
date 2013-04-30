@@ -30,6 +30,7 @@ public class en extends Language {
 			lang.load(langFile);
 			set("Login.Premium", "You have successfully logged in.");
 			set("Login.Cracked", "You have been logged in. You can now only log in to this server with your current username.");
+			set("Login.Key", "Please enter Key to proceed: ");
 			
 			set("Kick.AlreadyOnline", "A User with this username is already online.");
 			set("Kick.CrackedMultiIP", "You connecting to the server with same user but mutliple IPs");

@@ -33,6 +33,7 @@ public class de extends Language {
 			lang.load(langFile);
 			set("Login.Premium", "Du hast dich erfolgreich eingeloggt.");
 			set("Login.Cracked", "Du hast dich erfolgreich eingeloggt. Du darfst dich absofort auf diesem Server nur noch mit diesem Benutzernamen einloggen.");
+			set("Login.Key", "Bitte gib deinen Schlüssel ein um fortzufahren: ");
 			
 			set("Kick.AlreadyOnline", "Ein Spieler mit dem selben Benutzernamen ist schon online.");
 			set("Kick.CrackedMultiIP", "Du versuchst dich auf diesem Server mit unterschiedlichen IPs einzuloggen.");

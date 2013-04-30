@@ -32,7 +32,7 @@ public class LoginHandler implements Listener {
 	public void onPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
 		if (players.containsKey(event.getName())) {
 			event.setLoginResult(Result.KICK_OTHER);
-			event.setKickMessage(config.getString("Messages.Kick.UserAlreadyOnline"));
+			event.setKickMessage(io.translate("Kick.AlreadyOnline"));
 			return;
 		}
 		try {
@@ -44,7 +44,7 @@ public class LoginHandler implements Listener {
 				}
 				if (i > 0) {
 					event.setLoginResult(Result.KICK_OTHER);
-					event.setKickMessage(config.getString("Messages.Kick.Multi-Users"));
+					event.setKickMessage(io.translate("Kick.CrackedMultiUsers"));
 					return;
 				}
 			}
@@ -56,10 +56,17 @@ public class LoginHandler implements Listener {
 		if (player.isPremium()) {
 			if (player.isCracked()) {
 				event.setLoginResult(Result.KICK_OTHER);
-				event.setKickMessage(config.getString("Messages.Kick.Cracked-Premium-User"));
+				event.setKickMessage(io.translate("Kick.CrackedPremiumUser"));
 			}else event.setLoginResult(Result.ALLOWED);
 		}else {
-			
+			if (!player.isIPValid() && !config.getBoolean("Key.Enabled")) {
+				event.setLoginResult(Result.KICK_OTHER);
+				event.setKickMessage(io.translate("Kick.CrackedMultiIP"));
+			}
+			if (!player.isUsernameValid() && !config.getBoolean("Key.Enabled")) {				
+				event.setLoginResult(Result.KICK_OTHER);
+				event.setKickMessage(io.translate("Kick.CrackedMultiUsers"));
+			}
 		}
 	}
 	
@@ -67,18 +74,24 @@ public class LoginHandler implements Listener {
 	public void onPlayerLogin(PlayerLoginEvent event) {
 		AuthPlayer player = players.get(event.getPlayer().getName());
 		if (player.isPremium()) {
-			io.send(event.getPlayer(), config.getString("Messages.Login.Premium"));
-			event.getPlayer().sendMessage(config.getString("Messages.Login.Premium"));
+			io.send(event.getPlayer(), io.translate("Login.Premium"));
 		}else {
 			if (!player.isIPValid()) {
-				io.sendError(event.getPlayer(), config.getString("Messages.Kick.Cracked-Multi-IP"));
-				if (config.getBoolean("Key.Enabled")) {
-					io.send(event.getPlayer(), "Please enter password to proceed: ");
-					//TODO: Implement Password request
+				//TODO: Hide Player from the Public
+				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiIP"));
+				io.send(event.getPlayer(), io.translate("Login.Key"));
+				if (player.queryKey()) {
+					//TODO: Show Player to the Public
+				}
+			}if (!player.isUsernameValid()) {
+				//TODO: Hide Player from the Public
+				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiUsers"));
+				io.send(event.getPlayer(), io.translate("Login.Key"));
+				if (player.queryKey()) {
+					//TODO: Show Player to the Public
 				}
 			}else {
-				io.send(event.getPlayer(), config.getString("Messages.Login.Cracked"));
-				System.out.println("Cracked user " + player.getName() + " logged in");
+				io.send(event.getPlayer(), io.translate("Login.Cracked"));
 			}
 		}
 	}
