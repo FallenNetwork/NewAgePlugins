@@ -70,40 +70,34 @@ public class Configuration {
 	 * 
 	 */
 	public void updateConfig() throws IOException {
-		//TODO: Add missing settings
 		update("General.Debug", false);
+		update("General.Log-IPs", "all");
+		update("General.MaxCrackedUsersPerIP", 1);
+		update("General.AllowCracked", true);
+		update("General.MessageOnPremiumLogin", false);
+		update("General.MessageOnCrackedLogin", true);
+		
 		update("IO.Show-Prefix", true);
 		update("IO.Prefix", "&4[NewAgeAuth]");
 		update("IO.Error", "&c[Error]");
 		update("IO.Warning", "&e[Warning]");
 		update("IO.ColoredLogs", true);
+		
 		update("Database.System", "SQLite");
-		update("Messages.Login.Premium", "You have successfully logged in.");
-		update("Messages.Login.Cracked", "You have been logged in. You can now only log in to this server with your current username.");
-		update("Messages.Kick.UserAlreadyOnline", "A User with this username is already online");
-		update("Messages.Kick.Premium-User-Session-Failed", "Login Session is incorrect, please restart minecraft and try again");
-		update("Messages.Kick.Cracked-Multi-IP", "You connecting to the server with same user but mutliple IPs");
-		update("Messages.Kick.Multi-Users", "You connected to the server with different minecraft accounts. Please connect with the same you have connected with before.");
-		update("Messages.Kick.Cracked-Premium-User", "You connected to the server with a premium username but you are not currently logged in to that premium user. Please log in to that premium user or try a different username.");
-		update("Messages.Ban.1-Key-exceede-max-attempts", "You have exceeded the max amount of key attempts");
-		update("Messages.Ban.2-Key-exceede-max-attempts", "Attempts Made: %keyattemptsmade%");
-		update("Messages.Ban.3-Key-exceede-max-attempts", "Attempts Allowed: %keyattempsmax%");
-		update("Messages.Ban.4-Key-exceede-max-attempts", "Username: %username%");
-		update("Messages.Ban.5-Key-exceede-max-attempts", "IP: %IP%");
+		
 		update("Key.Enabled", true);
-		update("Key.Key-Timeout", 1);
-		update("Key.Max-Key-Attempts", 5);
-		update("Key.Keep-Key-Attempts", 1440);
-		update("Key.Ban-on-exceeded-key-attempts", true);
-		update("Key.Ban-exceeded-attempts-time", 2880);
+		update("Key.KeyTimeout", 1);
+		update("Key.MaxKeyAttempts", 5);
+		update("Key.KeepKeyAttempts", 1440);
+		update("Key.BanOnExceededKeyAttempts", true);
+		update("Key.BanExceededAttemptsTime", 2880);
+		
 		update("Spambot.Enabled", true);
-		update("Spambot.max-failed-login-attempts", 5);
-		update("Spambot.Login-wait-time", 1);
-		update("Spambot.Lock-Server", true);
-		update("Spambot.Lock-Server-Time", 5);
-		update("Spambot.Ban-IPs-associated", true);
-		update("Ban.Ban-Command", "ban");
-		update("Ban.Pardon-Command", "pardon");
+		update("Spambot.MaxFailedLoginAttempts", 5);
+		update("Spambot.LoginWaitTime", 1);
+		update("Spambot.LockServer", true);
+		update("Spambot.LockServerTime", 5);
+		update("Spambot.BanIPsAssociated", true);
 		config.save(configFile);
 	}
 
