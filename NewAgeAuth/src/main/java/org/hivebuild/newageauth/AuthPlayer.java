@@ -113,8 +113,7 @@ public class AuthPlayer {
 		//TODO: Show Player to the Public
 	}
 	
-	public boolean queryKey() {
+	public void queryKey() {
 		//TODO: Implement the key request
-		return true;
 	}
 }
