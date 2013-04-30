@@ -74,32 +74,30 @@ public class LoginHandler implements Listener {
 	@EventHandler
 	public void onPlayerLogin(PlayerLoginEvent event) {
 		AuthPlayer player = players.get(event.getPlayer().getName());
+		player.setPlayer(event.getPlayer());
 		if (player.isPremium()) {
 			io.send(event.getPlayer(), io.translate("Login.Premium"));
 		}else {
 			if (!player.isIPValid()) {
-				//TODO: Hide Player from the Public
+				player.hide();
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiIP"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (queryKey(event.getPlayer())) {
-					//TODO: Show Player to the Public
+				if (player.queryKey()) {
+					player.show();
+					io.send(event.getPlayer(), io.translate("Login.Cracked"));
 				}
 			}if (!player.isUsernameValid()) {
-				//TODO: Hide Player from the Public
+				player.hide();
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiUsers"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (queryKey(event.getPlayer())) {
-					//TODO: Show Player to the Public
+				if (player.queryKey()) {
+					player.show();
+					io.send(event.getPlayer(), io.translate("Login.Cracked"));
 				}
 			}else {
 				io.send(event.getPlayer(), io.translate("Login.Cracked"));
 			}
 		}
-	}
-	
-	private boolean queryKey(Player player) {
-		//TODO: Implement a Key Request
-		return false;
 	}
 
 	@EventHandler

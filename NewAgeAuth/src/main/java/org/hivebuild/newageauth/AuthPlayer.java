@@ -6,12 +6,14 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class AuthPlayer {
 
 	private String ip, key;
 	private final String name, lastIP;
 	private boolean cracked = false, premium = false;
+	private Player player;
 	
 	private static Configuration config;
 	private static Database db;
@@ -40,6 +42,10 @@ public class AuthPlayer {
 		}
 		premium = isPlayerPremium(name);
 		cracked = !isSessionValid(name);
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 	
 	public String getName() {
@@ -95,7 +101,20 @@ public class AuthPlayer {
 	}
 
 	public boolean isUsernameValid() {
-		//TODO: Implement a username validation
+		
 		return false;
+	}
+	
+	public void hide() {
+		//TODO: Hide Player from the Public
+	}
+	
+	public void show() {
+		//TODO: Show Player to the Public
+	}
+	
+	public boolean queryKey() {
+		//TODO: Implement the key request
+		return true;
 	}
 }
