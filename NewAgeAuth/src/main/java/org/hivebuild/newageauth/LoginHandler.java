@@ -4,12 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class LoginHandler implements Listener {
@@ -70,9 +69,9 @@ public class LoginHandler implements Listener {
 			}
 		}
 	}
-	
+
 	@EventHandler
-	public void onPlayerLogin(PlayerLoginEvent event) {
+	public void onPlayerJoin(PlayerJoinEvent event) {
 		AuthPlayer player = players.get(event.getPlayer().getName());
 		player.setPlayer(event.getPlayer());
 		if (player.isPremium()) {
@@ -80,26 +79,20 @@ public class LoginHandler implements Listener {
 		}else {
 			if (!player.isIPValid()) {
 				player.hide();
+				event.setJoinMessage(null);
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiIP"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (player.queryKey()) {
-					player.show();
-					io.send(event.getPlayer(), io.translate("Login.Cracked"));
-				}
+				player.queryKey();
 			}if (!player.isUsernameValid()) {
 				player.hide();
+				event.setJoinMessage(null);
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiUsers"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (player.queryKey()) {
-					player.show();
-					io.send(event.getPlayer(), io.translate("Login.Cracked"));
-				}
-			}else {
-				io.send(event.getPlayer(), io.translate("Login.Cracked"));
-			}
+				player.queryKey();
+			}else io.send(event.getPlayer(), io.translate("Login.Cracked"));
 		}
 	}
-
+	
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		players.remove(event.getPlayer().getName());
