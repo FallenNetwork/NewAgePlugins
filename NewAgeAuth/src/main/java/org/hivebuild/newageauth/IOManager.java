@@ -19,6 +19,7 @@ public class IOManager {
 	public static String prefix = ChatColor.DARK_RED + "[NewAgeAuth] " + ChatColor.WHITE;
 	public static String error = ChatColor.RED + "[Error] " + ChatColor.WHITE;
 	public static String warning = ChatColor.YELLOW + "[Warning] " + ChatColor.WHITE;
+	private static Translator translator;
 	private static boolean color = true;
 
 	static {
@@ -31,6 +32,8 @@ public class IOManager {
 		prefix = color(config.getString("IO.Prefix")) + " " + ChatColor.WHITE;
 		error = color(config.getString("IO.Error")) + " " + ChatColor.WHITE;
 		warning = color(config.getString("IO.Warning")) + " " + ChatColor.WHITE;
+		translator = new Translator();
+		translator.initialize();
 	}
 
 	public void sendConsole(String msg) {
@@ -92,7 +95,15 @@ public class IOManager {
 		if (showPrefix) sender.sendMessage(parseColor(prefix + error + ChatColor.RED + msg));
 		else sender.sendMessage(parseColor(warning + msg));
 	}
-
+	
+	public String translate(String key) {
+		return translator.getKey(key);
+	}
+	
+	public Translator getTranslator() {
+		return translator;
+	}
+	
 	public String color(String msg) {
 		if (color) return parseColor(msg);
 		else return remColor(msg);
