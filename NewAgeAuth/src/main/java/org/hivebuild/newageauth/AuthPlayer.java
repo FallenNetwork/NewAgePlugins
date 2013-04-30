@@ -93,4 +93,9 @@ public class AuthPlayer {
 	public void setKey(String key) {
 		this.key = key;
 	}
+
+	public boolean isUsernameValid() {
+		//TODO: Implement a username validation
+		return false;
+	}
 }

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
@@ -80,14 +81,14 @@ public class LoginHandler implements Listener {
 				//TODO: Hide Player from the Public
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiIP"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (player.queryKey()) {
+				if (queryKey(event.getPlayer())) {
 					//TODO: Show Player to the Public
 				}
 			}if (!player.isUsernameValid()) {
 				//TODO: Hide Player from the Public
 				io.sendError(event.getPlayer(), io.translate("Kick.CrackedMultiUsers"));
 				io.send(event.getPlayer(), io.translate("Login.Key"));
-				if (player.queryKey()) {
+				if (queryKey(event.getPlayer())) {
 					//TODO: Show Player to the Public
 				}
 			}else {
@@ -96,6 +97,11 @@ public class LoginHandler implements Listener {
 		}
 	}
 	
+	private boolean queryKey(Player player) {
+		//TODO: Implement a Key Request
+		return false;
+	}
+
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		players.remove(event.getPlayer().getName());
