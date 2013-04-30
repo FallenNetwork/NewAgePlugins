@@ -89,7 +89,7 @@ public class AuthPlayer {
 	
 	public static boolean isSessionValid(String name) {
 		//TODO: Implement a way to check the session
-		return true;
+		return false;
 	}
 
 	public String getKey() {
