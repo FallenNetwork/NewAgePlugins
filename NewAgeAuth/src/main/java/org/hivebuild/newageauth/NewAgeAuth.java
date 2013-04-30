@@ -1,5 +1,7 @@
 package org.hivebuild.newageauth;
 
+import java.io.File;
+
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hivebuild.newageauth.databases.MySQL;
 import org.hivebuild.newageauth.databases.SQLite;
@@ -18,7 +20,7 @@ public class NewAgeAuth extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		getDataFolder().mkdir();
+		new File(getDataFolder(), "lang").mkdirs();
 		config = new Configuration();
 		io = new IOManager();
 		config.init();
