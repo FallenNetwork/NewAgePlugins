@@ -1,5 +1,6 @@
 package org.hivebuild.newageauth;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,6 +40,8 @@ public class LoginHandler implements Listener {
 		} catch (IllegalArgumentException e) {
 			if (config.getDebug()) e.printStackTrace();
 		} catch (IllegalAccessException e) {
+			if (config.getDebug()) e.printStackTrace();
+		} catch (IOException e) {
 			if (config.getDebug()) e.printStackTrace();
 		}
 		if (players.containsKey(event.getName())) {
