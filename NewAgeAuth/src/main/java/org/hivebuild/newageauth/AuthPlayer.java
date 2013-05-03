@@ -122,6 +122,7 @@ public class AuthPlayer {
 			List pendingList = (List) field.get(connThread);
 			//Go through the list (only handling first entry)
 			for (Object connectionObject : pendingList) {
+				System.out.println("pending");
 				//Convert object into PendingConnection
 				PendingConnection connection = (PendingConnection) connectionObject;
 				//Get the LoginKey
