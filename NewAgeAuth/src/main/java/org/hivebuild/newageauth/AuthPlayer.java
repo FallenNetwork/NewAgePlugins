@@ -11,15 +11,15 @@ import java.util.List;
 
 import javax.crypto.SecretKey;
 
-import net.minecraft.server.v1_5_R2.DedicatedServer;
-import net.minecraft.server.v1_5_R2.DedicatedServerConnection;
-import net.minecraft.server.v1_5_R2.DedicatedServerConnectionThread;
-import net.minecraft.server.v1_5_R2.MinecraftEncryption;
-import net.minecraft.server.v1_5_R2.MinecraftServer;
-import net.minecraft.server.v1_5_R2.PendingConnection;
+import net.minecraft.server.v1_5_R3.DedicatedServer;
+import net.minecraft.server.v1_5_R3.DedicatedServerConnection;
+import net.minecraft.server.v1_5_R3.DedicatedServerConnectionThread;
+import net.minecraft.server.v1_5_R3.MinecraftEncryption;
+import net.minecraft.server.v1_5_R3.MinecraftServer;
+import net.minecraft.server.v1_5_R3.PendingConnection;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R2.CraftServer;
+import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
 import org.bukkit.entity.Player;
 
 public class AuthPlayer {
@@ -56,6 +56,7 @@ public class AuthPlayer {
 		}
 		premium = isPlayerPremium(name);
 		cracked = !isSessionValid();
+		System.out.println(cracked);
 	}
 	
 	public void setPlayer(Player player) {
@@ -169,11 +170,13 @@ public class AuthPlayer {
 	}
 	
 	public void hide() {
-		//TODO: Hide Player from the Public
+		Player[] players = NewAgeAuth.getInstance().getServer().getOnlinePlayers();
+		for (Player player : players) player.hidePlayer(this.player);
 	}
 	
 	public void show() {
-		//TODO: Show Player to the Public
+		Player[] players = NewAgeAuth.getInstance().getServer().getOnlinePlayers();
+		for (Player player : players) player.showPlayer(this.player);
 	}
 	
 	public void queryKey() {
