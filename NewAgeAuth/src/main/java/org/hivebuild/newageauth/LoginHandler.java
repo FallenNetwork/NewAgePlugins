@@ -30,6 +30,17 @@ public class LoginHandler implements Listener {
 	
 	@EventHandler
 	public void onPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+		try {
+			NewAgeAuth.setupReflections();
+		} catch (NoSuchFieldException e) {
+			if (config.getDebug()) e.printStackTrace();
+		} catch (SecurityException e) {
+			if (config.getDebug()) e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			if (config.getDebug()) e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			if (config.getDebug()) e.printStackTrace();
+		}
 		if (players.containsKey(event.getName())) {
 			event.setLoginResult(Result.KICK_OTHER);
 			event.setKickMessage(io.translate("Kick.AlreadyOnline"));
