@@ -55,7 +55,8 @@ public class AuthPlayer {
 			lastIP = ip;
 		}
 		premium = isPlayerPremium(name);
-		cracked = !isSessionValid();
+		if (!premium) cracked = true;
+		else cracked = !isSessionValid();
 		System.out.println(cracked);
 	}
 	
