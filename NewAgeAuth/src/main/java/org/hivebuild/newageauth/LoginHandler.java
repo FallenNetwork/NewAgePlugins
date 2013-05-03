@@ -31,7 +31,7 @@ public class LoginHandler implements Listener {
 			event.disallow(Result.KICK_OTHER, io.translate("Kick.AlreadyOnline"));
 			return;
 		}
-		try {
+		/*try {
 			ResultSet rs = db.query("SELECT * FROM `player` WHERE `ip`='" + event.getAddress() + "';");
 			if (rs != null) {
 				int i = 0;
@@ -44,7 +44,7 @@ public class LoginHandler implements Listener {
 			}
 		}catch(SQLException e) {
 			if (config.getDebug()) e.printStackTrace();
-		}
+		}*/
 		AuthPlayer player = new AuthPlayer(event.getPlayer().getName(), event.getAddress().getHostAddress());
 		players.put(player.getName(), player);
 		if (player.isPremium()) {
