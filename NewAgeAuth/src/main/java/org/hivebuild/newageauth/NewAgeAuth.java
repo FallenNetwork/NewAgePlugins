@@ -73,6 +73,17 @@ public class NewAgeAuth extends JavaPlugin {
 		return instance;
 	}
 	
+	
+	/**
+	 * 
+	 * Code for testing the reflections and stuff, use the isSessionValid in the AuthPlayer class instead
+	 * 
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws IOException
+	 */
 	public static void setupReflections() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, IOException {
 		Field field = CraftServer.class.getDeclaredField("console");
 		field.setAccessible(true);
