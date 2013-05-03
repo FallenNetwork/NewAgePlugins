@@ -16,26 +16,24 @@ public class LoginHandler implements Listener {
 	private static final IOManager io;
 	private static final Configuration config;
 	private static final Database db;
-	private final HashMap<String, AuthPlayer> players;
+	private static final HashMap<String, AuthPlayer> players;
 	
 	static {
+		players = new HashMap<String, AuthPlayer>();
 		config = NewAgeAuth.getConfiguration();
 		io = NewAgeAuth.getIOManager();
 		db = NewAgeAuth.getDb();
 	}
 	
-	{
-		players = new HashMap<String, AuthPlayer>();
-	}
-	
 	@EventHandler
 	public void onPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
+		System.out.println("onPlayerPreLogin-1");
 		if (players.containsKey(event.getName())) {
 			event.setLoginResult(Result.KICK_OTHER);
 			event.setKickMessage(io.translate("Kick.AlreadyOnline"));
 			return;
 		}
-		try {
+		/*try {
 			ResultSet rs = db.query("SELECT * FROM `player` WHERE `ip`='" + event.getAddress() + "';");
 			if (rs != null) {
 				int i = 0;
@@ -43,14 +41,13 @@ public class LoginHandler implements Listener {
 					if (rs.getString("name") != event.getName()) i++;
 				}
 				if (i > 0) {
-					event.setLoginResult(Result.KICK_OTHER);
-					event.setKickMessage(io.translate("Kick.CrackedMultiUsers"));
-					return;
+					event.disallow(Result.KICK_OTHER, io.translate("Kick.CrackedMultiUsers"));
 				}
 			}
 		}catch(SQLException e) {
 			if (config.getDebug()) e.printStackTrace();
-		}
+		}*/
+		System.out.println("onPlayerPreLogin-2");
 		System.out.println(event.getName());
 		AuthPlayer player = new AuthPlayer(event.getName(), event.getAddress().getHostAddress());
 		players.put(player.getName(), player);
@@ -75,6 +72,7 @@ public class LoginHandler implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		System.out.println(event.getPlayer().getName());
 		AuthPlayer player = players.get(event.getPlayer().getName());
+		System.out.println(player);
 		player.setPlayer(event.getPlayer());
 		if (player.isPremium()) {
 			io.send(event.getPlayer(), io.translate("Login.Premium"));
