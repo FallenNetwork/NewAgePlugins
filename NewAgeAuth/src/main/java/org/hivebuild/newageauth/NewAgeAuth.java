@@ -77,6 +77,7 @@ public class NewAgeAuth extends JavaPlugin {
 		List pendingList = (List) field.get(connThread);
 		for (Object connectionObject : pendingList) {
 			PendingConnection connection = (PendingConnection) connectionObject;
+			System.out.println("interrupting pending connection");
 			System.out.println(connection.getName());
 		}
 	}
