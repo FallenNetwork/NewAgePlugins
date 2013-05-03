@@ -168,7 +168,7 @@ public class AuthPlayer {
 
 	public boolean isUsernameValid() {
 		//TODO: Implement the Username Validation
-		return false;
+		return true;
 	}
 	
 	public void hide() {
