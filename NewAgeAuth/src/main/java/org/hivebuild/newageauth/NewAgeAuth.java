@@ -88,7 +88,7 @@ public class NewAgeAuth extends JavaPlugin {
 		List pendingList = (List) field.get(connThread);
 		for (Object connectionObject : pendingList) {
 			PendingConnection connection = (PendingConnection) connectionObject;
-			field = PendingConnection.class.getDeclaredField("loginkey");
+			field = PendingConnection.class.getDeclaredField("loginKey");
 			field.setAccessible(true);
 			String loginKey = (String) field.get(connection);
 			field = PendingConnection.class.getDeclaredField("g");
