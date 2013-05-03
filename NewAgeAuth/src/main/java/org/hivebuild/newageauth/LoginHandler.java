@@ -1,6 +1,5 @@
 package org.hivebuild.newageauth;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -52,6 +51,7 @@ public class LoginHandler implements Listener {
 		}catch(SQLException e) {
 			if (config.getDebug()) e.printStackTrace();
 		}
+		System.out.println(event.getName());
 		AuthPlayer player = new AuthPlayer(event.getName(), event.getAddress().getHostAddress());
 		players.put(player.getName(), player);
 		if (player.isPremium()) {
@@ -73,6 +73,7 @@ public class LoginHandler implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		System.out.println(event.getPlayer().getName());
 		AuthPlayer player = players.get(event.getPlayer().getName());
 		player.setPlayer(event.getPlayer());
 		if (player.isPremium()) {
